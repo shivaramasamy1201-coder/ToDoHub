@@ -1,0 +1,28 @@
+{
+  "name": "todohub-backend",
+  "version": "1.0.0",
+  "description": "ToDoHub REST API Backend Server",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [
+    "todohub",
+    "express",
+    "api"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/genai": "^2.25.0",
+    "@supabase/supabase-js": "^2.117.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.4"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "todohub-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ToDoHub - Full-Stack Modern Task Management Application",
+  "scripts": {
+    "dev:frontend": "npm --prefix frontend run dev",
+    "dev:backend": "npm --prefix backend run dev",
+    "install:all": "npm install --prefix frontend && npm install --prefix backend",
+    "start:backend": "npm --prefix backend start"
+  },
+  "keywords": [
+    "todohub",
+    "task-management",
+    "fullstack",
+    "react",
+    "express"
+  ],
+  "author": "",
+  "license": "ISC"
+}
