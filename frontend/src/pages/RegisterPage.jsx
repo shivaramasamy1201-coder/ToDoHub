@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
 import { Loader2, CheckCircle2 } from 'lucide-react';
 
+import todoHubLogo from '../assets/todohub-logo.png';
+
 const RegisterPage = () => {
   const navigate = useNavigate();
   const { register } = useAuth();
@@ -80,8 +82,20 @@ const RegisterPage = () => {
       backgroundColor: 'var(--color-background)'
     }}>
       <div className="todohub-card" style={{ width: '100%', maxWidth: '400px', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-        <div style={{ textAlign: 'center' }}>
-          <h1 style={{ fontSize: '1.5rem', fontWeight: 700 }}>ToDoHub</h1>
+        <div style={{ textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+            <img
+              src={todoHubLogo}
+              alt="ToDoHub Logo"
+              style={{
+                height: '36px',
+                width: '36px',
+                objectFit: 'contain',
+                flexShrink: 0
+              }}
+            />
+            <h1 style={{ fontSize: '1.75rem', fontWeight: 700, letterSpacing: '-0.02em', color: 'var(--color-text-primary)', margin: 0, lineHeight: 1 }}>ToDoHub</h1>
+          </div>
           <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)' }}>Create a new account</p>
         </div>
 

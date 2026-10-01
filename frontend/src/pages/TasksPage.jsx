@@ -10,19 +10,27 @@ import SearchBar from '../components/SearchBar';
 import { taskService } from '../services/supabase/taskService';
 import { categoryService } from '../services/supabase/categoryService';
 import { Plus, LayoutGrid, List, Filter } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 const TasksPage = () => {
+  const [searchParams] = useSearchParams();
   const [tasks, setTasks] = useState([]);
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   const [viewMode, setViewMode] = useState('grid');
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState(searchParams.get('search') || '');
   const [statusFilter, setStatusFilter] = useState('');
   const [priorityFilter, setPriorityFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
+
+  useEffect(() => {
+    const q = searchParams.get('search');
+    if (q !== null) {
+      setSearchTerm(q);
+    }
+  }, [searchParams]);
 
   const [deleteTargetId, setDeleteTargetId] = useState(null);
   const [toast, setToast] = useState(null);

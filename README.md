@@ -24,7 +24,7 @@ cd ../backend && npm install
 ### 2. Run Backend
 ```bash
 cd backend
-npm run dev
+npm.run dev
 ```
 Backend API will run at `http://localhost:5000`
 Health check: `http://localhost:5000/api/health`
@@ -32,13 +32,6 @@ Health check: `http://localhost:5000/api/health`
 ### 3. Run Frontend
 ```bash
 cd frontend
-npm run dev
+npm.run dev
 ```
 Frontend application will run at `http://localhost:5173`
-
-### 4. Run CMd 
-```bash
-cd frontend
-npm.cmd run dev
-
-# use it to run

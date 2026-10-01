@@ -16,6 +16,8 @@ import {
   LogOut
 } from 'lucide-react';
 
+import todoHubLogo from '../assets/todohub-logo.png';
+
 /**
  * Sidebar Component
  */
@@ -78,7 +80,21 @@ const Sidebar = ({ isOpen, onClose }) => {
           justifyContent: 'space-between',
           borderBottom: '1px solid var(--color-border)'
         }}>
-          <span style={{ fontWeight: 700, fontSize: '1.125rem' }}>Menu</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+            <img
+              src={todoHubLogo}
+              alt="ToDoHub Logo"
+              style={{
+                height: '26px',
+                width: '26px',
+                objectFit: 'contain',
+                flexShrink: 0
+              }}
+            />
+            <span style={{ fontWeight: 700, fontSize: '1.25rem', letterSpacing: '-0.02em', color: 'var(--color-text-primary)' }}>
+              ToDoHub
+            </span>
+          </div>
           <button 
             className="todohub-btn todohub-btn-icon" 
             onClick={onClose} 
