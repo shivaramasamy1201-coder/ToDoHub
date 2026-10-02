@@ -198,12 +198,12 @@ export const generateAssistantResponse = async (userMessage, history = [], userC
       message: 'GEMINI_API_KEY is missing from process.env',
       tool: null,
       userIdPresent: Boolean(userContext && userContext.userId),
-      geminiModel: process.env.GEMINI_MODEL || 'gemini-3.8-flash'
+      geminiModel: process.env.GEMINI_MODEL || 'gemini-2.5-flash'
     });
     throw new Error('GEMINI_CONFIG_ERROR: GEMINI_API_KEY is not configured on the server.');
   }
 
-  const modelName = process.env.GEMINI_MODEL || 'gemini-3.8-flash';
+  const modelName = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
   const ai = new GoogleGenAI({ apiKey });
 
   // Format initial conversation contents

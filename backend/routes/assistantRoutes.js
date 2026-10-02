@@ -55,17 +55,27 @@ router.post('/chat', requireAuth, async (req, res) => {
     // 5. Fallback to Local Productivity Assistant (with web search support)
     try {
       const localResult = await handleLocalAssistantQuery(trimmedMessage, userContext);
+
+      if (!localResult.success) {
+        return res.status(500).json({
+          success: false,
+          message: localResult.error || localResult.message || "Sorry, I couldn't process your request right now.",
+          fallback: true,
+          source: 'local'
+        });
+      }
+
       return res.status(200).json({
         success: true,
-        message: localResult.message,
+        message: localResult.message || "Request completed.",
         fallback: true,
         intent: localResult.intent,
         source: localResult.intent === 'web_search' ? 'web_search' : 'local'
       });
     } catch (localError) {
       console.error('Local Assistant Fallback Error:', localError.message);
-      return res.status(200).json({
-        success: true,
+      return res.status(500).json({
+        success: false,
         message: "Gemini AI is temporarily unavailable. I can still help with your tasks, deadlines, categories, and productivity statistics. Try asking: \"Show my tasks\" or \"Show my productivity statistics\".",
         fallback: true,
         source: 'local'
