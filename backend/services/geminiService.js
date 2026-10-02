@@ -203,7 +203,8 @@ export const generateAssistantResponse = async (userMessage, history = [], userC
     throw new Error('GEMINI_CONFIG_ERROR: GEMINI_API_KEY is not configured on the server.');
   }
 
-  const modelName = process.env.GEMINI_MODEL || 'gemini-2.5-flash';
+  let rawModel = (process.env.GEMINI_MODEL || 'gemini-2.5-flash').trim();
+  const modelName = (rawModel === 'gemini-3.8-flash' || !rawModel.startsWith('gemini-')) ? 'gemini-2.5-flash' : rawModel;
   const ai = new GoogleGenAI({ apiKey });
 
   // Format initial conversation contents
