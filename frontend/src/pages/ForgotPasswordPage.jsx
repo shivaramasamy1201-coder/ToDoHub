@@ -59,17 +59,17 @@ const ForgotPasswordPage = () => {
         {infoMessage && (
           <div style={{
             padding: '0.75rem',
-            backgroundColor: '#f4f4f5',
-            border: '1px solid var(--color-border)',
-            color: 'var(--color-text)',
+            backgroundColor: 'rgba(16, 185, 129, 0.15)',
+            border: '1px solid rgba(16, 185, 129, 0.3)',
+            color: '#10b981',
             borderRadius: 'var(--radius-md)',
             fontSize: '0.875rem',
             display: 'flex',
             alignItems: 'flex-start',
             gap: '0.5rem'
           }}>
-            <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
-            <span>{infoMessage}</span>
+            <CheckCircle2 size={18} style={{ flexShrink: 0, marginTop: '2px', color: '#10b981' }} />
+            <span style={{ color: '#10b981', fontWeight: 500 }}>{infoMessage}</span>
           </div>
         )}
 
