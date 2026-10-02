@@ -2,7 +2,10 @@ import {
   get_tasks,
   get_categories,
   get_calendar_tasks,
-  get_productivity_stats
+  get_productivity_stats,
+  create_task,
+  update_task,
+  delete_task
 } from './assistantTools.js';
 import { searchWeb, formatSearchResultsForAgent, isWebSearchAvailable } from './webSearchService.js';
 
@@ -11,6 +14,7 @@ import { searchWeb, formatSearchResultsForAgent, isWebSearchAvailable } from './
  * Handles user queries locally when Gemini API is unavailable or rate limited.
  * Now supports:
  * - All 8 original ToDoHub productivity intents
+ * - Local task creation, completion, deletion
  * - Web search fallback for general questions
  * - Productivity coaching and general help
  */
@@ -23,6 +27,26 @@ export const handleLocalAssistantQuery = async (userMessage, userContext) => {
   const nextWeek = new Date(today);
   nextWeek.setDate(nextWeek.getDate() + 7);
   const nextWeekStr = nextWeek.toISOString().split('T')[0];
+
+  // Intent 0: Create Task (High priority intent check)
+  const createMatch = (userMessage || '').trim().match(/^(?:add|create|new|remind me to)\s+(?:a\s+)?(?:task[:\s]+)?(.+)/i);
+  if (createMatch && createMatch[1]) {
+    let taskTitle = createMatch[1].trim();
+    // Remove trailing punctuation or phrases
+    taskTitle = taskTitle.replace(/^[:\s-]+/, '');
+    if (taskTitle) {
+      const res = await create_task({ title: taskTitle, priority: 'medium' }, userContext);
+      if (!res.success) {
+        return { success: false, error: res.error || 'Failed to create task.' };
+      }
+      return {
+        success: true,
+        message: `✨ **Task Created Successfully!**\n\n• **Title:** ${res.task?.title || taskTitle}\n• **Status:** Pending\n• **Priority:** Medium`,
+        intent: 'create_task',
+        task: res.task
+      };
+    }
+  }
 
   // Intent 1: Overdue Tasks
   if (msg.includes('overdue')) {
